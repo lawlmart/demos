@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
+    </head>
+    <body>
+        <a href="https://www.dropbox.com/oauth2/authorize?client_id=m570parbwm4v3ao&response_type=token&redirect_uri=https://nostalgic-sammet-ff70f3.netlify.com">Authenticate</a>
+        <script>
+            var accessToken = '';
+            if (window.location.hash) {
+                accessToken = window.location.hash.substring(0, window.location.hash.indexOf('&token_type')).replace("#access_token=", "")
+                console.log(accessToken)
+            }
+            var Dropbox = window.Dropbox.Dropbox;
+            var dbx = new Dropbox({ clientId: 'm570parbwm4v3ao', accessToken: accessToken });
+            dbx.filesListFolder({path: '', recursive: true})
+            .then(function(result) {
+                console.log(result.entries)
+            })
+        </script>
+    </body>
+</html>
